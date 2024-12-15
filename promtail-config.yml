@@ -1,0 +1,30 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+clients:
+  - url: http://138.201.225.231:3100/loki/api/v1/push
+
+positions:
+  filename: /tmp/positions.yaml
+
+scrape_configs:
+
+  - job_name: system-logs
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          host: FTSO-APPS
+          __path__: /var/log/*.log
+
+
+  - job_name: "pm2-logs"
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: "pm2"
+          app: "FTSO-PM2"
+          __path__: /root/.pm2/logs/data-pipeline-error.log
