@@ -1,0 +1,7 @@
+server {
+  listen 9205;
+   location /metrics {
+  proxy_pass http://ServerIP:9209/metrics;
+  add_header Content-Type text/plain;
+  }
+}
