@@ -23,11 +23,12 @@ wget https://raw.githubusercontent.com/mrkimoz/promtail/refs/heads/main/docker-c
 wget https://raw.githubusercontent.com/mrkimoz/promtail/refs/heads/main/promtail-config.yml
 sed -i "s/FTSO/$HOSTNAME/" promtail-config.yml
 docker-compose up -d
+pm2 install pm2-metrics
 apt install -y nginx
 systemctl restart nginx
 systemctl enable nginx
 cd /etc/nginx/sites-available/
 wget https://raw.githubusercontent.com/mrkimoz/promtail/refs/heads/main/prom-pm2
-sed -i "s/ServerIP/$PUBLIC_IP/"
+sed -i "s/ServerIP/$PUBLIC_IP/" prom-pm2
 ln -s /etc/nginx/sites-available/prom-pm2 /etc/nginx/sites-enabled/
 systemctl restart nginx
