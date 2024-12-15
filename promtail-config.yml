@@ -16,7 +16,7 @@ scrape_configs:
           - localhost
         labels:
           job: varlogs
-          host: FTSO-APPS
+          host: FTSO
           __path__: /var/log/*.log
 
 
@@ -27,4 +27,4 @@ scrape_configs:
         labels:
           job: "pm2"
           app: "FTSO-PM2"
-          __path__: /root/.pm2/logs/data-pipeline-error.log
+          __path__: /root/.pm2/logs/*.log
